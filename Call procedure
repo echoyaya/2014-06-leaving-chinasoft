@@ -1,0 +1,29 @@
+ public override int AddUpdateDatabase()
+        {
+            int rowsAffected = 0;
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(DATABASE_CONNECTION))
+                {
+                    // Open the connection
+                    sqlConnection.Open();
+
+                    // Create the stored procedure command
+                    SqlCommand cmd = new SqlCommand("CE_AddUpdateResults", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Specify the data class as a parameter
+                    SqlParameter paramData = new SqlParameter("@ResultsData", this.TableData);
+                    cmd.Parameters.Add(paramData);
+
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("[ResultsTableAddUpdate] FAIL: " + e.Message);
+                throw e;
+            }
+
+            return rowsAffected;
+        }
