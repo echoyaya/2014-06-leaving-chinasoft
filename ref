@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+       
+        
+        static void Main() 
+        {
+            int a = 2, b = 7;
+            Console.WriteLine("a = {0}, b = {1}", a, b); 
+            Swap(a, b);
+            Console.WriteLine("a = {0}, b = {1}", a, b);
+            Swap(ref a, ref b);
+            Console.WriteLine("a = {0}, b = {1}", a, b);
+            swap(a, b);
+            Console.WriteLine("a = {0}, b = {1}", a, b);
+        }
+
+        public static List<int> swap(int i, int j)
+        {
+            int temp;
+            temp = i;
+            i = j;
+            j = temp;
+            List<int> aa = new List<int>() { i, j };
+            return aa;
+        }
+        
+        static void Swap<T>(ref T a, ref T b) 
+        { 
+            T t = a; a = b; b = t;
+        }
+        static void Swap<T>(T a,T b)
+        {
+            T t = a; a = b; b = t;
+        } 
+    }
+}
